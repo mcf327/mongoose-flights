@@ -20,12 +20,12 @@
 
 <h3>Tickets:</h3>
 <% if (tickets.length) { %>
-  <ul>
+  <ul class = "ticket-box">
     <% tickets.forEach(function(ticket) { %>
-      <li>
+      <li class = "ticket-item">
         Seat: <%= ticket.seat %>, Price: $<%= ticket.price %>
           <form action="/flights/<%= flight._id %>/tickets/<%= ticket._id %>?_method=DELETE" method="POST" id="delete-form">
-            <button type="submit" class="delete-ticket-button">Delete Ticket</button>
+             <button type="submit" class="delete-ticket-button">Delete Ticket</button>
           </form>
       </li>
     <% }); %>
@@ -40,13 +40,19 @@
 <form action="/flights/<%= flight._id %>/destinations" method="POST">
     <label>Airport
       <select name="airport">
-        <option value="AUS">AUS</option>
-        <option value="DFW">DFW</option>
-        <option value="DEN">DEN</option>
-        <option value="LAX">LAX</option>
-        <option value="SAN">SAN</option>
-        <option value="LGA">LGA</option>
-        <option value="JFK">JFK</option>
+        <% const usedAirports = [flight.airport]; %>
+        <% flight.destinations.forEach(function(destination) { %>
+          <% if(!usedAirports.includes(destination.airport)) { %>
+            <% usedAirports.push(destination.airport); %>
+          <% } %>
+        <% }); %>
+        <option value="AUS" <% if (usedAirports.includes('AUS')) { %> disabled <% } %> >AUS</option>
+        <option value="DFW" <% if (usedAirports.includes('DFW')) { %> disabled <% } %> >DFW</option>
+        <option value="DEN" <% if (usedAirports.includes('DEN')) { %> disabled <% } %> >DEN</option>
+        <option value="LAX" <% if (usedAirports.includes('LAX')) { %> disabled <% } %> >LAX</option>
+        <option value="SAN" <% if (usedAirports.includes('SAN')) { %> disabled <% } %> >SAN</option>
+        <option value="LGA" <% if (usedAirports.includes('LGA')) { %> disabled <% } %> >LGA</option>
+        <option value="JFK" <% if (usedAirports.includes('JFK')) { %> disabled <% } %> >JFK</option>
       </select>
     </label><br>
     <label>Arrival Time</label>

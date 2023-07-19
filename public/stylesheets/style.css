@@ -21,7 +21,10 @@ a {
 nav {
   background-color: #007bff;
   padding: 10px;
+  padding-right: 25px;
   color: #fff;
+  display: flex;
+  justify-content: end;
 }
 
 nav a {
@@ -84,21 +87,24 @@ form select {
   align-items: center;
 }
 
-.delete-ticket-container {
+.ticket-box {
   display: flex;
-  align-items: center;
+  flex-direction: column;
 }
 
 #delete-form {
-  display: inline-block;
+  display: inline-flex;
 }
 
 .delete-ticket-button {
-  display: inline-block;
   cursor: pointer;
   border: none;
   padding: 5px 10px;
   border-radius: 5px;
   color: #fff;
   background-color: #dc3545;
+}
+
+nav > a:hover {
+  color: #222;
 }
