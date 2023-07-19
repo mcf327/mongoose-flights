@@ -4,6 +4,10 @@ body {
   padding: 0;
 }
 
+body :not(nav, a) {
+  margin-left: 20px;
+}
+
 .container {
   max-width: 960px;
   margin: 0 auto;
@@ -22,7 +26,6 @@ nav {
 
 nav a {
   color: #fff;
-  margin-right: 10px;
 }
 
 table {
@@ -56,4 +59,46 @@ form select {
   border: 1px solid #ddd;
   border-radius: 4px;
   display: flex;
+}
+
+.new-ticket-button {
+  margin-left: 20px;
+  background-color: #f6d47e;
+  padding: 10px 20px;
+  border-radius: 10px;
+  color: rgb(91, 91, 202);
+  font-weight: bold;
+}
+
+.new-ticket-button:hover {
+  background-color: #e0b94b;
+}
+
+.seat-box {
+  display: flex;
+  align-items: center;
+}
+
+.price-box {
+  display: flex;
+  align-items: center;
+}
+
+.delete-ticket-container {
+  display: flex;
+  align-items: center;
+}
+
+#delete-form {
+  display: inline-block;
+}
+
+.delete-ticket-button {
+  display: inline-block;
+  cursor: pointer;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: #fff;
+  background-color: #dc3545;
 }

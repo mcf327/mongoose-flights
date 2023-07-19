@@ -18,7 +18,25 @@
     <p>No destinations added.</p>
 <% } %>
 
-<br><h3>Add Destination</h3>
+<h3>Tickets:</h3>
+<% if (tickets.length) { %>
+  <ul>
+    <% tickets.forEach(function(ticket) { %>
+      <li>
+        Seat: <%= ticket.seat %>, Price: $<%= ticket.price %>
+          <form action="/flights/<%= flight._id %>/tickets/<%= ticket._id %>?_method=DELETE" method="POST" id="delete-form">
+            <button type="submit" class="delete-ticket-button">Delete Ticket</button>
+          </form>
+      </li>
+    <% }); %>
+  </ul>
+<% } else { %>
+  <p>No tickets added for this flight.</p>
+<% } %> <br>
+
+<a href="/flights/<%= flight._id %>/tickets/new" class="new-ticket-button">New Ticket</a>
+
+<br><br><h3>Add Destination</h3>
 <form action="/flights/<%= flight._id %>/destinations" method="POST">
     <label>Airport
       <select name="airport">

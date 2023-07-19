@@ -1,4 +1,5 @@
 const Flight = require('../models/flight');
+const Ticket = require('../models/ticket');
 
 async function index(req, res) {
     const flights = await Flight.find({}).sort({ departs: 1 });
@@ -26,8 +27,9 @@ function newFlight(req, res) {
 async function show(req, res) {
   try {
     const flight = await Flight.findById(req.params.id);
+    const tickets = await Ticket.find({ flight: flight._id });
     flight.destinations.sort((a,b) => a.arrival - b.arrival);
-    res.render('flights/show', { flight: flight });
+    res.render('flights/show', { flight: flight, tickets: tickets });
   } catch (err) {
     console.log(err);
     res.redirect('/flights');
@@ -44,22 +46,9 @@ async function create(req, res) {
     }
   }
 
-async function addDestination(req, res) {
-  try {
-    const flight = await Flight.findById(req.params.id);
-    flight.destinations.push(req.body);
-    await flight.save();
-    res.redirect(`/flights/${flight._id}`);
-  } catch (err) {
-    console.log(err);
-    res.redirect('/flights');
-  }
-}
-
 module.exports = {
     index,
     new: newFlight,
     create,
     show,
-    addDestination
 }
